@@ -1,0 +1,8 @@
+Projects #Index
+
+= link_to "New Project", new_project_path
+
+%br
+- @projects.each do |project|
+    = link_to project.name, project_path(project)
+    %br

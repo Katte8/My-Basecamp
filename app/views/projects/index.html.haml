@@ -1,8 +1,22 @@
-Projects #Index
 
-= link_to "New Project", new_project_path
 
-%br
-- @projects.each do |project|
-    = link_to project.name, project_path(project)
-    %br
+%div.flex-container{style: "display: flex; gap: 20px"}
+  %div.projects-container{style:"background-color: rgba(253, 253, 253, 0.4);backdrop-filter: blur(10px)"}
+    %h2 My Projects
+    %ul.projects-list
+      - @assigned_projects.each do |project|
+        %li.project-item
+          = link_to project.name, project_path(project)
+        %br
+
+  %div.projects-container{style:"background-color: rgba(253, 253, 253, 0.4);backdrop-filter: blur(10px)"}
+    %h2 Other Projects
+    %ul.projects-list
+      - @other_projects.each do |project|
+        %li.project-item
+          = link_to project.name, project_path(project)
+        %br
+%br   
+%div.navbar
+  %ul
+    %li= link_to "New Project", new_project_path

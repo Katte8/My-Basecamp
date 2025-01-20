@@ -1,0 +1,32 @@
+.flex-container
+  / First Column
+  .user-info{style: "flex: 1;"}
+    %h2 Welcome to User menu
+    - if current_user
+      %h3= "Your email is: #{current_user.email}"
+      %h3= "Your role is: #{current_user.role}"
+      = link_to 'Delete this user', 
+                users_path(current_user), 
+                method: :delete, 
+                data: { confirm: 'This will delete your user. Are you sure?' }, 
+                style: 'background-color: rgb(40, 40, 41); color: azure; padding: 5px; height:20px;border-radius: 3px;padding:10px'
+      = link_to 'Change your user Role', 
+                update_role_user_path(current_user), 
+                method: :patch, 
+                style: 'background-color: rgb(75, 22, 13); color: azure; padding: 5px; height:20px;border-radius: 3px;padding:10px', 
+                onclick: 'setTimeout(function(){ location.reload(); }, 500);'
+
+  / Second Column
+  .admin-info{style: "flex: 1;"}
+    - if current_user.role == "admin"
+      .projects-container{style: "background-color: rgba(253, 253, 253, 0.4); backdrop-filter: blur(10px)"}
+        %h3 As an admin, you can delete users:
+        - User.all.each do |user|
+          %p
+            %b= user.email
+            - if user != current_user
+              = link_to 'Delete this user', 
+                        user_path(user), 
+                        method: :delete, 
+                        data: { confirm: 'This will delete this user. Are you sure?' }, 
+                        style: 'background-color: rgb(40, 40, 41); color: azure; padding: 2px; height:10px;border-radius: 3px;padding:5px'

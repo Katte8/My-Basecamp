@@ -1,6 +1,17 @@
-Project #Show
-
-= link_to "Project index", projects_path
-
-%br
-= @project.name
+%div.flex-container{style: "display: flex; flex-direction: column; gap: 20px; padding: 1em"}
+    %div.projects-container{style:"background-color: rgba(253, 253, 253, 0.4);backdrop-filter: blur(10px)"}
+        %h3 Project name:
+        = @project.name
+        %br
+        %h3 Project description:
+        = @project.description
+        %br
+        %h3 Project assigned to:
+        - @project.memberships.each do |membership|
+            %div
+                = membership.user.email
+                = "(#{membership.role})" if membership.role.present?
+        %br
+    = link_to "Edit this project", edit_project_path, data: { confirm: 'This will edit the project. Are you sure?' }, style: 'background-color: rgb(40, 40, 41); color: azure; padding: 5px; height:20px;border-radius: 3px;padding:10px'
+    = link_to 'Delete this project', project_path(@project), method: :delete, data: { confirm: 'This will delete the project. Are you sure?' }, style: 'background-color: rgb(75, 22, 13); color: azure; padding: 5px; height:20px;border-radius: 3px;padding:10px'
+    

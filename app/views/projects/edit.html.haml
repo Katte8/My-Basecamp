@@ -1,4 +1,3 @@
-
 = simple_form_for @project do |f|
   %div.projects-container{style:"background-color: rgba(253, 253, 253, 0.4);backdrop-filter: blur(10px)"}
     %div.field
@@ -14,8 +13,8 @@
       %ul.user-list
         - User.all.each do |user|
           %li
-            = f.check_box :user_ids, { multiple: true }, user.id, nil
+            = f.check_box :user_ids, { multiple: true, checked: @project.user_ids.include?(user.id) }, user.id, nil
             = user.email
 
     %div.actions
-      = f.submit "Create Project"
+      = f.submit "Update Project"

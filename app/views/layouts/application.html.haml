@@ -9,6 +9,9 @@
     = csrf_meta_tags
     = csp_meta_tag
     = yield :head
+    %link{href: "https://fonts.googleapis.com", rel: "preconnect"}/
+    %link{crossorigin: "", href: "https://fonts.gstatic.com", rel: "preconnect"}/
+    %link{href: "https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@400&display=swap", rel: "stylesheet"}/
     %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
     %link{:href => "/icon.svg", :rel => "icon", :type => "image/svg+xml"}/
     %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
@@ -16,5 +19,12 @@
     = javascript_importmap_tags
   %body
     - if user_signed_in?
-      = link_to "Log Out", destroy_user_session_path, method: :delete
+      %header
+        =link_to (image_tag "logo.png", style: "width: 300px; height: auto; border-radius: 15px;margin-top: 10px"), root_path
+        %nav.navbar
+          %ul
+            %li= link_to "Home", root_path
+            %li= link_to "Projects", projects_path
+            %li= link_to "Users", users_path
+            %li= link_to "Log Out", destroy_user_session_path, method: :delete
     = yield
